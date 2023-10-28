@@ -3,7 +3,7 @@
 This is the first group project on Makers Academy's Software Engineering bootcamp.
 This is a barebones crud app for Airbnb, created over one week through TTD, OOP, and Agile practices (pair programming, Kanban boards, etc.).
 
-Project by Claire Peng, David O'Donnel, Daniel Kruszewski, and Onoura Wright.
+Project by Claire Peng, David O'Donnell, Daniel Kruszewski, and Onoura Wright.
 
 The project aims are as follows:
 
@@ -45,5 +45,5 @@ UI Mockups (provided in project brief):
 ## Screenshot:
 
 MVP Screenshot on Friday -- MVP achieved. As a group we chose to concentrated on the test-driving backend elements to satisfy the headline specs.
-TODO - personal extension project to recreate Airbnb UI to practice frontend.
+<br>TODO - personal extension project to recreate Airbnb UI to practice frontend.
 ![Screenshot](./readme_images/Screenshot%202023-10-28%20at%2018.47.34.png)
