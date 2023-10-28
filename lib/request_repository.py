@@ -67,16 +67,27 @@ class RequestRepository:
     # ===== CONFIRM A REQUEST =====
 
     def confirm(self, request_id):
-        query = 'UPDATE requests SET confirmed = True WHERE id = %s'
+        # Update the 'confirmed' column for requests to TRUE for the matching request
+        query = 'UPDATE requests SET confirmed = TRUE WHERE id = %s'
         params = [request_id]
+        self._connection.execute(query, params)
+        
+        # Find the date and listing of the request
+        request = self.find(request_id)
+        date = request.date_requested
+        listing = request.listing_id
 
+        # Update the 'request_id' column for date_listings to id for the matching date & listing.
+        query = 'UPDATE dates_listings SET request_id = %s WHERE date_available = %s AND listing_id = %s'
+        params = [request_id, date, listing]
         self._connection.execute(query, params)
         return None
     
     # ===== DENY A REQUEST =====
 
     def deny(self, request_id):
-        query = 'UPDATE requests SET confirmed = False WHERE id = %s'
+        # Update the 'confirmed' column for requests to FALSE for the matching request
+        query = 'UPDATE requests SET confirmed = FALSE WHERE id = %s'
         params = [request_id]
 
         self._connection.execute(query, params)

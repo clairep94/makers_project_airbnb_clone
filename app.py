@@ -303,24 +303,30 @@ def single_request_get(id):
 ## Confirm request
 @app.route('/requests/<id>/confirm', methods=['POST'])
 def single_request_confirm_post(id):
-    ## @Daniel @Dave
-    # Should update the 'confirmed' column for requests to TRUE for WHERE requests.id = id
-    # Should update the 'request_id' column for dates_listings to id for WHERE listing_id =%s AND date_available =%s' [list_id of the request, date_requested of the request]
-    # should return redirect('/requests')
-    choice = f"Confirm request #{id}"
-    return choice
+    connection = get_flask_database_connection(app)
+    repository = RequestRepository(connection)
     
+    # Update the 'confirmed' column for requests to TRUE for the matching request
+    # Update the 'request_id' column for date_listings to id for the matching date & listing.
+    repository.confirm(id)
+
+    choice = f"Confirm request #{id}"
+    print(choice)
+    return redirect('/requests')
+
 
 ## Deny request
 @app.route('/requests/<id>/deny', methods=['POST'])
 def single_request_deny_post(id):
-    ## @Daniel @Dave
-    # Should update the 'confirmed' column for requests to FALSE for WHERE requests.id = id
-    # should return redirect('/requests')
+    connection = get_flask_database_connection(app)
+    repository = RequestRepository(connection)
+
+    # Update the 'confirmed' column for requests to FALSE for the matching request
+    repository.deny(id)
+
     choice = f"Deny request #{id}"
-    return choice
-
-
+    print(choice)
+    return redirect('/requests')
 
 
 

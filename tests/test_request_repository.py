@@ -1,6 +1,7 @@
 from datetime import date
 from lib.request_repository import RequestRepository
 from lib.request import Request
+from lib.date_listing_repo import DateListingRepo, DateListing
 
 ## Requests REPOSITORY ###########
 
@@ -65,6 +66,7 @@ def test_delete_request(db_connection):
 def test_confirm_request(db_connection):
     db_connection.seed("seeds/makers_bnb.sql")
     repository = RequestRepository(db_connection)
+    availability_repo = DateListingRepo(db_connection)
 
     repository.confirm(2)
     assert sorted(repository.all(), key=lambda x: x.id) == [
@@ -73,6 +75,13 @@ def test_confirm_request(db_connection):
         Request(3, date(2023,10,24), 3, 2, None),
         Request(4, date(2023,10,24), 4, 1, None)
     ]
+    assert sorted(availability_repo.all(), key=lambda x: x.id) == [
+        DateListing(1, date(2023,10,24), 1, 1),
+        DateListing(2, date(2023,10,24), 2, 2),
+        DateListing(3, date(2023,10,24), 3, None),
+        DateListing(4, date(2023,10,24), 4, None)
+    ]
+
 
 
     # ===== DENY A REQUEST =====
@@ -102,7 +111,7 @@ def test_requests_received(db_connection):
         'date_requested': date(2023, 10, 24),
         'listing_id': 1,
         'requester_id': 3,
-        'confirmed': True,
+        'confirmed': 'Confirmed',
         'title': 'House 1'
     }]
 
@@ -118,7 +127,7 @@ def test_requests_made(db_connection):
         'date_requested': date(2023, 10, 24),
         'listing_id': 2,
         'requester_id': 1,
-        'confirmed': None,
+        'confirmed': 'Not confirmed',
         'title': 'House 2'
     },
     {
@@ -126,7 +135,7 @@ def test_requests_made(db_connection):
         'date_requested': date(2023, 10, 24),
         'listing_id': 4,
         'requester_id': 1,
-        'confirmed': None,
+        'confirmed': 'Not confirmed',
         'title': 'House 4'   
     }]
 
