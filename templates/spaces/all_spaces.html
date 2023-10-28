@@ -87,25 +87,33 @@
 
     <!-- SEARCH FOR LISTINGS AVAILABLE ON A SPECIFIC DATE -->
     <!-- Available From form (limit input to dates?) +  Available To form (limit input to dates?)  +   List Spaces button (POST) -->
-    <form class="search_dates" action="/spaces" method="post">
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px">
-            <div style="display: flex; flex-direction: column; align-items: left;">
-                <label for="DateFrom">Available from:</label>
-                <input type="date" name="date_from" id="datefrom">
-            </div>
+    <div class="search_dates_form">
+        <form class="search_dates" action="/spaces" method="post">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-gap: 10px">
+                <div style="display: flex; flex-direction: column; align-items: left;">
+                    <label for="DateFrom">Available from:</label>
+                    <input type="date" name="date_from" id="datefrom">
+                </div>
 
-            <div style="display: flex; flex-direction: column; align-items: left;">
-                <label for="DateTo">Available to:</label>
-                <input type="date" name="date_to" id="dateto">
-            </div>
+                <div style="display: flex; flex-direction: column; align-items: left;">
+                    <label for="DateTo">Available to:</label>
+                    <input type="date" name="date_to" id="dateto">
+                </div>
 
-            <button type="submit" class="search_dates_button" style="grid-column: 3 / span 1; text-align: center;">
-                Search Spaces
-            </button>
-        </div>
-    </form>
+                <button type="submit" class="search_dates_button" style="grid-column: 3 / span 1; text-align: center;">
+                    Search Spaces
+                </button>
+            </div>
+        </form>
+    </div>
     <!-- SEARCH FOR LISTINGS AVAILABLE ON A SPECIFIC DATE -->
-
+    <!-- We check to see if there are any errors from a previous submission -->
+    {% if errors %}
+        <!-- If so, we show them. -->
+        <p class="t-errors">
+            There were errors with your listing details: <br>{{ errors }}
+        </p>
+    {% endif %}
 
     <br>
     <br>

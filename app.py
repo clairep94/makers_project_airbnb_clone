@@ -112,18 +112,22 @@ def all_spaces_page():
         listing_repository = ListingRepository(connection)    
         spaces = listing_repository.all()
 
+        # Searching for a specific date range
         if request.method == 'POST':
+            #CAPTURING FORM SUBMISSION FIELDS:
             date_from_string = request.form['date_from']
             date_to_string = request.form['date_to']
             print(f"Date from: {date_from_string}, Date to: {date_to_string}")
-            #TODO: error handling for blank fields or when date is invalid;
 
-
+            # check for errors:
+            if listing_repository.check_search_for_errors(available_from=date_from_string, available_to=date_to_string):
+                return render_template('/spaces/all_spaces.html', spaces=spaces, errors=listing_repository.generate_search_errors(available_from=date_from_string, available_to=date_to_string))
 
             date_from = datetime.strptime(date_from_string, '%Y-%m-%d')
             date_to = datetime.strptime(date_to_string, '%Y-%m-%d')
             available_spaces = listing_repository.find_available_listings_for_dates(available_from=date_from, available_to=date_to)
             return render_template('/spaces/all_spaces.html', spaces=available_spaces)
+
         else:
             return render_template('/spaces/all_spaces.html', spaces=spaces)
     else:
