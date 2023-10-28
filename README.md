@@ -1,36 +1,49 @@
-# MakersBnB Python Project Seed
+# MakersBnB Python Project
 
-This repo contains the seed codebase for the MakersBnB project in Python (using 
-Flask and Pytest).
+This is the first group project on Makers Academy's Software Engineering bootcamp.
+This is a barebones crud app for Airbnb, created over one week through TTD, OOP, and Agile practices (pair programming, Kanban boards, etc.).
 
-Someone in your team should fork this seed repo to their Github account. 
-Everyone in the team should then clone this fork to their local machine to work on it.
+Project by Claire Peng, David O'Donnel, Daniel Kruszewski, and Onoura Wright.
 
-## Setup
+The project aims are as follows:
 
-```shell
-# Install dependencies and set up the virtual environment
-; pipenv install
+* Learn to work and communicate effectively as part of a team to build a web application.
+* Learn to break down projects into tasks and assign them to pairs.
+* Learn to use agile ceremonies to organise your work and improve your processes.
+* Learn to use the developer workflow to plan, implement and peer-review features.
 
-# Activate the virtual environment
-; pipenv shell
+Tech used:
 
-# Install the virtual browser we will use for testing
-; playwright install
-# If you have problems with the above, contact your coach
+* Python, Flask
+* psycopg, PostgreSQL
+* Playwright, Pytest
+* Git, Github
 
-# Create a test and development database
-; createdb YOUR_PROJECT_NAME
-; createdb YOUR_PROJECT_NAME_TEST
 
-# Open lib/database_connection.py and change the database names
-; open lib/database_connection.py
+## Project Specification:
 
-# Run the tests (with extra logging)
-; pytest -sv
+We would like a web application that allows users to list spaces they have available, and to hire spaces for the night.
 
-# Run the app
-; python app.py
+### Headline specifications (provided in project brief)
 
-# Now visit http://localhost:5000/index in your browser
-```
+- Any signed-up user can list a new space.
+- Users can list multiple spaces.
+- Users should be able to name their space, provide a short description of the space, and a price per night.
+- Users should be able to offer a range of dates where their space is available.
+- Any signed-up user can request to hire any space for one night, and this should be approved by the user that owns that space.
+- Nights for which a space has already been booked should not be available for users to book that space.
+- Until a user has confirmed a booking request, that space can still be booked for that night.
+
+## Planning:
+
+ER Diagram for simple Makersbnb relational database:
+![ER Diagram](./readme_images/makersbnb_er_diagram.png)
+
+UI Mockups (provided in project brief):
+![UI Mockup](./readme_images/MakersBnB_mockups.jpg)
+
+## Screenshot:
+
+MVP Screenshot on Friday -- MVP achieved. As a group we chose to concentrated on the test-driving backend elements to satisfy the headline specs.
+TODO - personal extension project to recreate Airbnb UI to practice frontend.
+![Screenshot](./readme_images/Screenshot%202023-10-28%20at%2018.47.34.png)
